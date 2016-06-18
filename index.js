@@ -5,10 +5,17 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
 
+const ws = require('./ws-server')
+
 
 
 const db = ndjson.stringify()
 db.pipe(fs.createWriteStream('data.ndjson', {flags: 'a'}))
+
+
+
+const realtime = ws()
+realtime.listen(3002)
 
 
 
@@ -28,10 +35,10 @@ wolke.post('/', (req, res) => {
 		, longitude: +req.body.longitude
 		, line:       req.body.line
 	}
+	realtime.publish(JSON.stringify(data))
 	db.write(data)
 	res.status(200).end()
 })
 
-
-
 wolke.listen(3001)
+
