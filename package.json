@@ -5,5 +5,10 @@
 	"main": "index.js",
 	"author": "Jannis R <mail@jannisr.de>",
 	"contributors": ["Julius Tens <mail@juliuste.de>"],
-	"license": "ISC"
+	"license": "ISC",
+	"dependencies": {
+		"ndjson": "^1.4.3",
+		"express": "^4.14",
+		"body-parser": "^1.15.1"
+	}
 }
