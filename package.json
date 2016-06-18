@@ -1,0 +1,9 @@
+{
+	"name": "ice-wolke",
+	"version": "1.0.0",
+	"description": "Collect data from Inter City Express trains.",
+	"main": "index.js",
+	"author": "Jannis R <mail@jannisr.de>",
+	"contributors": ["Julius Tens <mail@juliuste.de>"],
+	"license": "ISC"
+}
