@@ -4,7 +4,9 @@
 	"description": "Collect data from Inter City Express trains.",
 	"main": "index.js",
 	"author": "Jannis R <mail@jannisr.de>",
-	"contributors": ["Julius Tens <mail@juliuste.de>"],
+	"contributors": [
+		"Julius Tens <mail@juliuste.de>"
+	],
 	"license": "ISC",
 	"dependencies": {
 		"body-parser": "^1.15.1",
@@ -14,8 +16,8 @@
 	},
 	"scripts": {
 		"start": "forever start -a --uid ice-wolke index.js",
-		"stop":  "forever stop ice-wolke",
-		"autostart-on":  "autostart enable -n ice-wolke -p $PWD -c 'npm start'",
+		"stop": "forever stop ice-wolke",
+		"autostart-on": "autostart enable -n ice-wolke -p $PWD -c 'npm start'",
 		"autostart-off": "autostart disable -n ice-wolke"
 	}
 }

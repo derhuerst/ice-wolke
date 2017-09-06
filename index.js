@@ -1,6 +1,7 @@
 'use strict'
 
 const ndjson = require('ndjson')
+const http = require('http')
 const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
@@ -10,19 +11,20 @@ const createWsServer = require('./ws-server')
 const db = ndjson.stringify()
 db.pipe(fs.createWriteStream('data.ndjson', {flags: 'a'}))
 
-const realtime = createWsServer()
-realtime.listen(3002)
+const api = express()
+const server = http.createServer(api)
+const realtime = createWsServer(server)
 
-const wolke = express()
-wolke.use(bodyParser.urlencoded({extended: true}))
+api.use(bodyParser.urlencoded({extended: true}))
+api.use(bodyParser.json())
 
-wolke.get('/', (req, res) => {
+api.get('/', (req, res) => {
 	res.status(200)
 	fs.createReadStream('data.ndjson')
 	.pipe(res)
 })
 
-wolke.post('/', (req, res) => {
+api.post('/', (req, res) => {
 	const data = {
 		  when:      +req.body.when
 		, latitude:  +req.body.latitude
@@ -34,5 +36,10 @@ wolke.post('/', (req, res) => {
 	res.status(200).end()
 })
 
-wolke.listen(3001)
-
+const port = process.env.PORT || 3000
+server.listen(port, (err) => {
+	if (err) {
+		console.error(err)
+		process.exit(1)
+	} else console.info(`Listening on port ${port}.`)
+})

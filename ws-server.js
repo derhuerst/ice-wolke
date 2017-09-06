@@ -1,9 +1,9 @@
 'use strict'
 
-const Server = require('ws')
+const {Server} = require('ws')
 
-const createServer = () => {
-	const server = new Server()
+const createServer = (httpServer) => {
+	const server = new Server({server: httpServer})
 
 	const connections = []
 	server.on('connection', (connection) => {
