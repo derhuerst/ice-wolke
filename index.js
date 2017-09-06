@@ -3,6 +3,7 @@
 const ndjson = require('ndjson')
 const http = require('http')
 const express = require('express')
+const corser = require('corser')
 const bodyParser = require('body-parser')
 const fs = require('fs')
 
@@ -15,6 +16,7 @@ const api = express()
 const server = http.createServer(api)
 const realtime = createWsServer(server)
 
+api.use(corser.create())
 api.use(bodyParser.urlencoded({extended: true}))
 api.use(bodyParser.json())
 
