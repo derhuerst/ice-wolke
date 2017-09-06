@@ -1,20 +1,24 @@
 'use strict'
 
-const ws = require('nodejs-websocket')
+const Server = require('ws')
 
-const server = () => {
+const createServer = () => {
+	const server = new Server()
+
 	const connections = []
-	const server = ws.createServer((connection) => {
+	server.on('connection', (connection) => {
 		connections.push(connection)
-		connection.on('close', () => {
+		connection.once('close', () => {
 			const i = connections.indexOf(connection)
 			if (i >= 0) connections.splice(i, 1)
 		})
 	})
+
 	server.publish = (msg) => {
-		for (let connection of connections) connection.sendText(msg)
+		for (let connection of connections) connection.send(msg)
 	}
+
 	return server
 }
 
-module.exports = server
+module.exports = createServer

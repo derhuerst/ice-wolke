@@ -7,10 +7,10 @@
 	"contributors": ["Julius Tens <mail@juliuste.de>"],
 	"license": "ISC",
 	"dependencies": {
-		"ndjson": "^1.4.3",
-		"express": "^4.14",
 		"body-parser": "^1.15.1",
-		"nodejs-websocket": "^1.6"
+		"express": "^4.14",
+		"ndjson": "^1.4.3",
+		"ws": "^3.1.0"
 	},
 	"scripts": {
 		"start": "forever start -a --uid ice-wolke index.js",
